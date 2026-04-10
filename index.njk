@@ -13,11 +13,13 @@ layout: base-layout.njk
 </header>
 
 <main>
-  <section class="h-[50vh] min-h-[300px] bg-zinc-800 text-white">
+  <section class="h-[50vh] min-h-[300px] bg-zinc-800 text-white relative overflow-hidden">
+    <div class="absolute -left-24 top-20 h-72 w-72 rounded-full bg-orange-300/10 blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 h-80 w-80 translate-x-1/4 translate-y-1/4 rounded-full bg-white/10 blur-3xl"></div>
     <div class="app-container flex items-center justify-start h-full">
       <div>
-        <h1 class="text-5xl">Ти, в най-добрата си версия</h1>
-        <h2 class="text-xl">Персонална грижа и иновативни решения за твоята увереност всеки ден</h2>
+        <h1 class="text-6xl font-title font-medium mb-4">Ти, в най-добрата си версия</h1>
+        <h2 class="text-xl max-w-[42ch]">Персонална грижа и иновативни решения за твоята увереност всеки ден</h2>
       </div>
     </div>
   </section>

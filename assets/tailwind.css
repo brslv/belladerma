@@ -4,6 +4,10 @@ html {
   font-family: 'Montserrat', sans-serif;
 }
 
+.font-title {
+  font-family: 'Cormorant Garamond', serif;
+}
+
 .app-container {
   @apply container mx-auto p-4;
 }
