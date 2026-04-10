@@ -1,0 +1,27 @@
+{
+  "name": "belladerma",
+  "version": "1.0.0",
+  "description": "Belladerma",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/tailwind.css -o ./_artefacts/style.css --minify",
+    "watch:css": "tailwindcss -i ./assets/tailwind.css -o ./_artefacts/style.css --watch",
+    "build:site": "eleventy",
+    "watch:site": "eleventy --serve --port=5050",
+    "build": "npm run build:css && npm run build:site",
+    "dev": "concurrently \"npm:watch:css\" \"npm:watch:site\"",
+    "start": "npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.5",
+    "@tailwindcss/cli": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
