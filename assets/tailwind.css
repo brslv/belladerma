@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+html {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.app-container {
+  @apply container mx-auto p-4;
+}
