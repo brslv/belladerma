@@ -1,13 +1,104 @@
 @import "tailwindcss";
 
+@theme {
+  --color-pearl: #f7f4ef;
+  --color-sand: #efebe4;
+  --color-mist: #f2dccd;
+  --color-tango: #e07e33;
+  --color-tango-deep: #b85f1e;
+  --color-graphite: #1f2425;
+  --color-smoke: #5f6667;
+  --color-line: #d9d4cc;
+}
+
 html {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-size: 93.75%; /* 15 px */
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 100%;
+  }
+}
+
+::selection {
+  background-color: var(--color-tango-deep);
+  color: var(--color-pearl);
 }
 
 .font-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Noto Serif Display", serif;
 }
 
 .app-container {
   @apply container mx-auto p-4;
+}
+
+.btn {
+  @apply flex items-center justify-center gap-2 transition rounded-lg border border-transparent;
+}
+.btn-rounded {
+  @apply rounded-full;
+}
+.btn-sm {
+  @apply px-3 py-2;
+}
+.btn-md {
+  @apply px-4 py-3;
+}
+.btn-primary {
+  @apply bg-tango-deep hover:bg-tango text-pearl;
+}
+.btn-primary-outlined {
+  @apply bg-transparent border-tango-deep text-tango-deep hover:bg-tango-deep hover:text-pearl;
+}
+.btn-inverted {
+  @apply bg-pearl text-graphite hover:bg-tango;
+}
+.btn-inverted-outlined {
+  @apply bg-transparent border-pearl text-pearl hover:bg-pearl hover:text-graphite;
+}
+.btn-inverted-outlined-primary {
+  @apply bg-transparent border-pearl hover:border-tango text-pearl hover:text-tango hover:bg-transparent;
+}
+.btn-hover-anim {
+  @apply hover:-translate-y-0.5;
+}
+
+.icon-menu::after {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  vertical-align: -0.125em;
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75' clip-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 768px) {
+  .menu {
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-0.75rem);
+    transition:
+      transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 240ms ease,
+      visibility 0s linear 240ms;
+  }
+
+  .menu.is-open {
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 240ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu {
+    transition: none;
+  }
 }

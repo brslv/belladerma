@@ -1,26 +1,112 @@
 ---
 layout: base-layout.njk
 ---
-<header class="sticky top-0 z-50 border-b border-line/70 bg-mauve-100/85 backdrop-blur w-full h-[50px] flex items-center">
-  <nav class="app-container flex items-center gap-4 justify-between">
+<header class="sticky top-0 z-50 border-b border-line/70 bg-pearl/85 backdrop-blur w-full h-18 flex items-center">
+  <nav class="p-4 px-8 w-full flex items-center gap-4 justify-between text-sm">
     <div>Belladerma</div>
-    <ul class="flex items-center gap-4">
-      <li><a href="#">Начало</a></li>
-      <li><a href="#">За нас</a></li>
-      <li><a href="#">Процедури</a></li>
+    <button type="button" class="md:hidden cursor-pointer hover:bg-sand p-1 rounded-md" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Отвори навигацията">
+      <span class="icon-menu"></span>
+    </button>
+    <ul id="menu" class="menu absolute md:relative top-18 md:top-0 left-0 md:left-auto w-full md:w-auto bg-pearl p-6 md:p-0 md:bg-transparent backdrop-blur md:backdrop-blur-none items-start md:items-center gap-2 md:gap-1 flex flex-col md:flex-row" aria-hidden="true">
+      <li class="w-full">
+        <a href="#" class="flex items-center md:justify-center font-semibold px-3 py-2 rounded-full bg-transparent hover:bg-sand whitespace-nowrap">Начало</a>
+      </li>
+      <li class="w-full">
+        <a href="#" class="flex items-center md:justify-center font-semibold px-3 py-2 rounded-full bg-transparent hover:bg-sand whitespace-nowrap">За нас</a>
+      </li>
+      <li class="w-full">
+        <a href="#" class="flex items-center md:justify-center font-semibold px-3 py-2 rounded-full bg-transparent hover:bg-sand whitespace-nowrap">Процедури</a>
+      </li>
+      <div class="w-full h-px bg-line/70 my-2 md:hidden"></div>
+      <li>
+        <a href="#" class="flex items-center md:justify-center font-semibold btn btn-primary btn-hover-anim text-md btn-sm btn-rounded whitespace-nowrap">Запазете час</a>
+      </li>
     </ul>
+    <script>
+      (function () {
+        var menuBtn = document.getElementById("menu-btn");
+        var menu = document.getElementById("menu");
+
+        function syncMobileMenuState(isOpen) {
+          if (!menuBtn || !menu) {
+            return;
+          }
+
+          menu
+            .classList
+            .toggle("is-open", isOpen);
+          menuBtn.setAttribute(
+            "aria-expanded", isOpen
+            ? "true"
+            : "false");
+          menuBtn.setAttribute(
+            "aria-label", isOpen
+            ? "Затвори навигацията"
+            : "Отвори навигацията");
+          menu.setAttribute(
+            "aria-hidden", isOpen
+            ? "false"
+            : "true");
+        }
+
+        function resetMenuForViewport() {
+          if (!menu) {
+            return;
+          }
+
+          if (window.innerWidth >= 600) {
+            menu
+              .classList
+              .remove("is-open");
+            menu.removeAttribute("aria-hidden");
+            if (menuBtn) {
+              menuBtn.setAttribute("aria-expanded", "false");
+              menuBtn.setAttribute("aria-label", "Отвори навигацията");
+            }
+            return;
+          }
+
+          syncMobileMenuState(menu.classList.contains("is-open"));
+        }
+
+        if (menuBtn) {
+          menuBtn.addEventListener("click", function () {
+            if (menu) {
+              syncMobileMenuState(!menu.classList.contains("is-open"));
+            }
+          });
+        }
+
+        window.addEventListener("resize", resetMenuForViewport);
+        resetMenuForViewport();
+        window.addEventListener("click", function (event) {
+          if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+            syncMobileMenuState(false);
+          }
+        });
+        window.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
+            syncMobileMenuState(false);
+          }
+        });
+      }());
+    </script>
   </nav>
 </header>
 
 <main>
-  <section class="h-[50vh] min-h-[300px] bg-zinc-800 text-white relative overflow-hidden">
-    <div class="absolute -left-24 top-20 h-72 w-72 rounded-full bg-orange-300/10 blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 h-80 w-80 translate-x-1/4 translate-y-1/4 rounded-full bg-white/10 blur-3xl"></div>
-    <div class="app-container flex items-center justify-start h-full">
+  <section class="h-[70vh] min-h-125 bg-graphite text-white relative overflow-hidden">
+    <div class="z-10 relative app-container flex items-center justify-start h-full">
       <div>
-        <h1 class="text-6xl font-title font-medium mb-4">Ти, в най-добрата си версия</h1>
-        <h2 class="text-xl max-w-[42ch]">Персонална грижа и иновативни решения за твоята увереност всеки ден</h2>
+        <h1 class="text-4xl md:text-6xl font-title italic font-semibold mb-4">Ти, в най-добрата си версия</h1>
+        <h2 class="text-lg md:text-xl max-w-[42ch]">Персонална грижа и иновативни решения за твоята увереност всеки ден</h2>
+        <div class="pt-8 flex flex-col sm:flex-row items-center gap-4">
+          <a href="#" class="btn btn-md btn-inverted btn-hover-anim btn-rounded w-full sm:w-auto">Свържете се с нас</a>
+          <a href="#" class="btn btn-md btn-inverted-outlined-primary btn-rounded btn-hover-anim w-full sm:w-auto">Разгледайте процедурите</a>
+        </div>
       </div>
     </div>
+    <div class="absolute -left-24 top-20 h-72 w-72 rounded-full bg-mist/20 blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 h-180 w-180 translate-x-1/4 translate-y-1/4 rounded-full bg-pearl/5 blur-3xl"></div>
   </section>
 </main>
